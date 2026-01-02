@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Today Widget</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: "Lucida Sans Unicode",
+                   -apple-system, BlinkMacSystemFont,
+                   "Segoe UI",
+                   "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+                   "Yu Gothic", Meiryo, sans-serif;
+      background: transparent;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 12px;
+    }
+
+    .date-box {
+      display: inline-block;
+      background-color: #ffb5e0;
+      padding: 18px 20px;
+      border-radius: 14px;
+    }
+
+    .date-line {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+      color: #ffffff;
+      margin-bottom: -7px; /* 日付と時刻の間 */
+    }
+
+    .date {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .day {
+      font-size: 18px;
+    }
+
+    .time {
+      font-size: 18px;
+      color: #ffe0f2;
+      letter-spacing: 0.18em;
+      font-family: "Meiryo UI", Meiryo, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="date-box">
+      <div class="date-line">
+        <span class="date" id="date"></span>
+        <span class="day" id="day"></span>
+      </div>
+      <div class="time" id="time"></div>
+    </div>
+  </div>
+
+  <script>
+    const dayMap = ["日", "月", "火", "水", "木", "金", "土"];
+
+    function updateDateTime() {
+      const now = new Date();
+
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const date = String(now.getDate()).padStart(2, "0");
+      const day = dayMap[now.getDay()];
+
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+
+      document.getElementById("date").textContent =
+        `${month}/${date}`;
+      document.getElementById("day").textContent =
+        `(${day})`;
+      document.getElementById("time").textContent =
+        `${hours}:${minutes}`;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 60000);
+  </script>
+</body>
+</html>
